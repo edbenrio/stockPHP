@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Movements extends Model
+class Movement extends Model
 {
     protected $fillable = ['producto_id', 'tipo', 'cantidad', 'usuario_id'];
 
@@ -15,6 +15,6 @@ class Movements extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class); // O `Usuario` si usas otro modelo
     }
 }
