@@ -17,12 +17,21 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         /**crear usuario y asignar rol */
+        /* super admin */
         $u = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Super Admin',
+            'email' => 'superadmin@example.com',
         ]);
 
-        $role = Role::create(['name' => 'Super Admin']);
-        $u->assignRole($role);
+        $roles = ["caja", "deposito", "admin"];
+        foreach ($roles as $role) {
+            Role::create(['name' => $role]);
+            $u = User::factory()->create([
+                'name' => $role,
+                'email' => $role .'@example.com',
+            ]);
+            $u->assignRole($role);
+        }
+
     }
 }
