@@ -81,6 +81,53 @@ class MovementController extends Controller
         return view('sales.index', compact('sales'));
     }
 
+    public function stockLoadHistory() {
+        $stocks = Movement::
+            where('tipo', 'entrada')
+            ->with('product.category')
+            ->get();
+        return view('stock.stock-history', compact('stocks'));
+    }
+
+    public function getUpdateStock() {
+        $products = Product::
+            with('category')
+            ->get();
+        return view('stock.update_stock', compact('products'));
+    }
+
+    public function updateStock(Request $request) {
+        $request->validate([
+            'product_id' => 'required|min:1',
+            'cantidad' => 'required|integer|min:1',
+        ]);
+
+        $product = Product::findOrFail($request->product_id);
+
+        \DB::beginTransaction();
+        try {
+            /*Registrar el movimiento*/
+            Movement::create([
+                'product_id' => $product->id,
+                'cantidad' => $request->cantidad,
+                'precio' => 0,
+                'subtotal' => 0,
+                'tipo' => 'entrada',
+                'user_id' => \Auth::user()->id,
+            ]);
+
+            /* Actualizar stock*/
+            $product->increment('stock_actual', $request->cantidad);
+            
+            \DB::commit();
+            return redirect()->route('getUpdateStock')->with('success', 'Venta registrada exitosamente.');
+
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            return back()->with('error', 'Ocurrió un error al procesar la venta: '. $e->getMessage());
+        }
+    }
+
     /**
      * Display the specified resource.
      */

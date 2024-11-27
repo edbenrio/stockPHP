@@ -80,7 +80,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/movements" class="nav-link {{ Request::is('movements') ? 'active' : '' }}">
+            <a href="/get_update_stock" class="nav-link {{ Request::is('get_update_stock') ? 'active' : '' }}">
               <i class="nav-icon far ion-log-in"></i>
               <p>
                 Cargar stock
@@ -115,7 +115,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
+            <a href="/get_stock_history" class="nav-link {{ Request::is('get_stock_history') ? 'active' : '' }}">
               <i class="nav-icon fas ion-ios-download"></i>
               <p>
                 Cargas

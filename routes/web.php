@@ -21,10 +21,14 @@ Route::middleware('auth')->group(function () {
     Route::get('categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
 
     Route::resource('products', App\Http\Controllers\ProductController::class);
+
     Route::resource('movements', App\Http\Controllers\MovementController::class);
     Route::get('movements', [App\Http\Controllers\MovementController::class, 'index'])->name('pos');
+    Route::get('get_update_stock', [App\Http\Controllers\MovementController::class, 'getUpdateStock'])->name('getUpdateStock');
+    Route::post('update_stock', [App\Http\Controllers\MovementController::class,'updateStock'])->name('update_stock');
 
     Route::get('sales', [App\Http\Controllers\MovementController::class, 'sales']);
+    Route::get('get_stock_history', [App\Http\Controllers\MovementController::class, 'stockLoadHistory']);
 });
 
 require __DIR__.'/auth.php';
