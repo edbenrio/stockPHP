@@ -98,8 +98,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
+          <li class="nav-link {{ Request::is('sales') ? 'active' : '' }}">
+            <a href="/sales" class="nav-link">
               <i class="nav-icon fas ion-ios-cart"></i>
               <p>
                 Ventas

@@ -73,6 +73,14 @@ class MovementController extends Controller
         }
     }
 
+    public function sales() {
+        $sales = Movement::
+            where('tipo', 'salida')
+            ->with('product.category')
+            ->get();
+        return view('sales.index', compact('sales'));
+    }
+
     /**
      * Display the specified resource.
      */

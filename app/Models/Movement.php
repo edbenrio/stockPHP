@@ -15,9 +15,9 @@ class Movement extends Model
         'user_id',
     ];
 
-    public function producto()
+    public function product()
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function usuario()
