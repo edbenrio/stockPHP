@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->text('descripcion')->nullable();
-            $table->integer('stock_actual')->default(0);
+            $table->float('stock_actual', 13,3)->default(0);
+            $table->float('precio', 13,3)->default(0);
             $table->timestamps();
 
             $table->unsignedBigInteger('category_id');
