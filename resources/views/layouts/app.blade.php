@@ -26,7 +26,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -71,6 +71,7 @@
       <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">Carga y venta</li>
+          @hasanyrole(['admin', 'caja'])
           <li class="nav-item">
             <a href="/movements" class="nav-link {{ Request::is('movements') ? 'active' : '' }}">
               <i class="nav-icon far ion-card"></i>
@@ -79,6 +80,8 @@
               </p>
             </a>
           </li>
+          @endhasanyrole
+          @hasanyrole(['admin', 'deposito'])
           <li class="nav-item">
             <a href="/get_update_stock" class="nav-link {{ Request::is('get_update_stock') ? 'active' : '' }}">
               <i class="nav-icon far ion-log-in"></i>
@@ -87,9 +90,11 @@
               </p>
             </a>
           </li>
+          @endhasanyrole
       </ul>
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-header">Módulos</li>
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-header">Módulos</li>
+          @hasanyrole(['admin'])
           <li class="nav-item">
             <a href="/categories" class="nav-link {{ Request::is('categories') ? 'active' : '' }}">
               <i class="nav-icon far ion-android-checkbox-outline"></i>
@@ -98,6 +103,8 @@
               </p>
             </a>
           </li>
+          @endhasanyrole
+          @hasanyrole(['admin'])
           <li class="nav-item">
             <a href="/products" class="nav-link {{ Request::is('products') ? 'active' : '' }}">
               <i class="nav-icon far ion-cube"></i>
@@ -106,6 +113,8 @@
               </p>
             </a>
           </li>
+          @endhasanyrole
+          @hasanyrole(['admin', 'caja'])
           <li class="nav-item">
             <a href="/sales" class="nav-link {{ Request::is('sales') ? 'active' : '' }}">
               <i class="nav-icon far ion-ios-cart"></i>
@@ -114,6 +123,8 @@
               </p>
             </a>
           </li>
+          @endhasanyrole
+          @hasanyrole(['admin', 'deposito'])
           <li class="nav-item">
             <a href="/get_stock_history" class="nav-link {{ Request::is('get_stock_history') ? 'active' : '' }}">
               <i class="nav-icon fas ion-ios-download"></i>
@@ -122,6 +133,7 @@
               </p>
             </a>
           </li>
+          @endhasanyrole
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

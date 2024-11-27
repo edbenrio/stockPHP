@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(190);
         Gate::before(function ($user, $ability) {
-            return $user->hasRole('Super Admin') ? true : null;
+            return $user->hasAnyRole('Super Admin') ? true : null;
         });
     }
 }

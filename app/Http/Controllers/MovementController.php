@@ -32,6 +32,7 @@ class MovementController extends Controller
      */
     public function store(Request $request)
     {
+        if(!(\Auth::user()->hasAnyRole('admin', 'deposito', 'caja'))) abort(403, 'No tienes permiso para realizar esta acción.');
         //dd($request->all());
         $request->validate([
             'products.*.product_id' => 'required|integer|min:1',
@@ -74,6 +75,7 @@ class MovementController extends Controller
     }
 
     public function sales() {
+        if(!(\Auth::user()->hasAnyRole('admin', 'deposito', 'caja'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $sales = Movement::
             where('tipo', 'salida')
             ->with('product.category')
@@ -82,6 +84,7 @@ class MovementController extends Controller
     }
 
     public function stockLoadHistory() {
+        if(!(\Auth::user()->hasAnyRole('admin', 'deposito', 'caja'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $stocks = Movement::
             where('tipo', 'entrada')
             ->with('product.category')
@@ -90,6 +93,7 @@ class MovementController extends Controller
     }
 
     public function getUpdateStock() {
+        if(!(\Auth::user()->hasAnyRole('admin', 'deposito', 'caja'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $products = Product::
             with('category')
             ->get();
@@ -97,6 +101,7 @@ class MovementController extends Controller
     }
 
     public function updateStock(Request $request) {
+        if(!(\Auth::user()->hasAnyRole('admin', 'deposito', 'caja'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
             'product_id' => 'required|min:1',
             'cantidad' => 'required|integer|min:1',
@@ -126,6 +131,14 @@ class MovementController extends Controller
             \DB::rollBack();
             return back()->with('error', 'Ocurrió un error al procesar la venta: '. $e->getMessage());
         }
+    }
+
+    public function report() {
+        $products = \App\Models\Product::count();
+        $sales = Movement::where('tipo','salida')->count();
+        $total_income = Movement::where('tipo','salida')->sum('subtotal');
+        $stock_bajo = \App\Models\Product::where('stock_actual', '<', 3)->get();
+        return view('dashboard.index', compact('products','sales','total_income','stock_bajo'));
     }
 
     /**

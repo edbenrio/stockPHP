@@ -21,21 +21,23 @@
 
     <form action="{{ route('movements.store') }}" method="POST" id="pos-form">
         @csrf
-        <div class="mb-3">
-            <label for="product-select" class="form-label">Producto</label>
-            <select id="product-select" class="form-control">
-                <option value="">Seleccione un producto</option>
-                @foreach($products as $product)
-                    <option value="{{ $product->id }}" data-price="{{ $product->precio }}" data-name="{{ $product->nombre }}">
-                        {{ $product->nombre }} (Stock: {{ $product->stock_actual }}, Precio: {{ $product->precio }})
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="quantity" class="form-label">Cantidad</label>
-            <input type="number" id="quantity" class="form-control" min="1">
+        <div class="row">
+            <div class="lg-6 md-6 mb-3">
+                <label for="product-select" class="form-label">Producto</label>
+                <select id="product-select" class="form-control">
+                    <option value="">Seleccione un producto</option>
+                    @foreach($products as $product)
+                        <option value="{{ $product->id }}" data-price="{{ $product->precio }}" data-name="{{ $product->nombre }}">
+                            {{ $product->nombre }} (Stock: {{ $product->stock_actual }}, Precio: {{ $product->precio }})
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        
+            <div class="lg-6 md-6 mb-3">
+                <label for="quantity" class="form-label">Cantidad</label>
+                <input type="number" id="quantity" class="form-control" min="1">
+            </div>
         </div>
 
         <div class="mb-3">

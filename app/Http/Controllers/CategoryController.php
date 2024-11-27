@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        if(Gate::denies('category_index')) abort(403, 'No tienes permiso para realizar esta acción.');
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $categories = Category::all();
         return view('category.index', compact('categories'));
     }
@@ -23,6 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         return view('category.create');
     }
 
@@ -31,7 +32,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if(Gate::denies('category_create')) abort(403, 'No tienes permiso para realizar esta acción.');
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
             'nombre' => ['required','string','max:255'],
             'descripcion' => ['required','string','max:255'],
@@ -60,8 +61,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        if(Gate::denies('category_edit')) abort(403, 'No tienes permiso para realizar esta acción.');
-        $category = Category::find($id);
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');        $category = Category::find($id);
         return view('category.edit', compact('category'));
     }
 
@@ -70,7 +70,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        if(Gate::denies('category_edit')) abort(403, 'No tienes permiso para realizar esta acción.');
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
             'nombre' => ['required','string','max:255'],
             'descripcion' => ['required','string','max:255'],
@@ -91,7 +91,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if(Gate::denies('category_delete')) abort(403, 'No tienes permiso para realizar esta acción.');
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $category->delete();
         return redirect()->route('categories')
             ->with('success','Categoría eliminada satisfactoriamente.');

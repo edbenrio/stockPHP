@@ -22,6 +22,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $categories = \App\Models\Category::all(); // Obtener todas las categorías
         return view('product.create', compact('categories'));
     }
@@ -31,6 +32,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string|max:255',
@@ -56,6 +58,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $categories = \App\Models\Category::all();
         $product = Product::find($id);
         return view('product.edit', compact('product', 'categories'));
@@ -66,6 +69,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string|max:255',
@@ -83,6 +87,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Producto eliminado exitosamente.');
     }
