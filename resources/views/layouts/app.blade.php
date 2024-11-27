@@ -62,7 +62,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         
         <div class="info">
-          <a href="#" class="d-block">Prueba de PHP</a>
+          <a href="/" class="d-block">Prueba de PHP</a>
         </div>
       </div>
 
@@ -70,12 +70,20 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-header">Módulos</li>
+          <li class="nav-header">Carga y venta</li>
           <li class="nav-item">
             <a href="/movements" class="nav-link {{ Request::is('movements') ? 'active' : '' }}">
               <i class="nav-icon far ion-card"></i>
               <p>
                 POS
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/movements" class="nav-link {{ Request::is('movements') ? 'active' : '' }}">
+              <i class="nav-icon far ion-log-in"></i>
+              <p>
+                Cargar stock
               </p>
             </a>
           </li>
@@ -98,9 +106,9 @@
               </p>
             </a>
           </li>
-          <li class="nav-link {{ Request::is('sales') ? 'active' : '' }}">
-            <a href="/sales" class="nav-link">
-              <i class="nav-icon fas ion-ios-cart"></i>
+          <li class="nav-item">
+            <a href="/sales" class="nav-link {{ Request::is('sales') ? 'active' : '' }}">
+              <i class="nav-icon far ion-ios-cart"></i>
               <p>
                 Ventas
               </p>
