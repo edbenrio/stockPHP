@@ -13,9 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $this->authorize('category_create');
-        $categorias = Category::all();
-        return view('category.index', compact('categorias'));
+        $products = Product::with('category')->get();
+        return view('product.index', compact('products'));
     }
 
     /**
@@ -23,7 +22,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = \App\Models\Category::all(); // Obtener todas las categorías
+        return view('product.create', compact('categories'));
     }
 
     /**
@@ -31,7 +31,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+            'precio' => 'required|numeric',
+            'stock_actual' => 'required|integer|min:0',
+            'category_id' => 'required|numeric',
+        ]);
+    
+        Product::create($request->all());
+        return redirect()->route('products.index')->with('success', 'Producto creado exitosamente.');
     }
 
     /**
@@ -45,9 +54,11 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $categories = \App\Models\Category::all();
+        $product = Product::find($id);
+        return view('product.edit', compact('product', 'categories'));
     }
 
     /**
@@ -55,7 +66,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+            'precio' => 'required|numeric',
+            'stock_actual' => 'required|integer|min:0',
+            'category_id' => 'required|numeric',
+        ]);
+
+        $product->update($request->all());
+        return redirect()->route('products.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
     /**
@@ -63,6 +83,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Producto eliminado exitosamente.');
     }
 }

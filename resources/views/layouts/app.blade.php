@@ -8,7 +8,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
@@ -23,7 +23,7 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="index3.html" class="nav-link">Home</a>
@@ -35,15 +35,18 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="ion-android-person"></i> <i class="far fa-person"></i>
-                </a>
-                <div class="dropdown-menu  dropdown-menu-right">
-                    <a href="#" class="dropdown-item dropdown-footer">Cerrar sesión</a>
-                </div>
-            </li>
+            <form action="{{ route('logout') }}" method="POST">
+              @csrf
+              <li class="nav-item dropdown">
+                  <a class="nav-link" data-toggle="dropdown" href="#">
+                  <i class="ion-android-person"></i> <i class="far fa-person"></i>
+                  </a>
+                  
+                  <div class="dropdown-menu  dropdown-menu-right">
+                      <button type="submit" class="dropdown-item dropdown-footer">Cerrar sesión</a>
+                  </div>
+              </li>
+            </form>
         </ul>
     </nav>
 
@@ -66,6 +69,17 @@
       
       <!-- Sidebar Menu -->
       <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-header">Módulos</li>
+          <li class="nav-item">
+            <a href="/categories" class="nav-link {{ Request::is('categories') ? 'active' : '' }}">
+              <i class="nav-icon far ion-android-checkbox-outline"></i>
+              <p>
+                POS
+              </p>
+            </a>
+          </li>
+      </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">Módulos</li>
           <li class="nav-item">
@@ -77,7 +91,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="/products" class="nav-link {{ Request::is('products') ? 'active' : '' }}">
               <i class="nav-icon far ion-cube"></i>
               <p>
                 Productos
