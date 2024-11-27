@@ -53,7 +53,7 @@ class MovementController extends Controller
                 
                 /*Registrar el movimiento*/
                 Movement::create([
-                    'producto_id' => $product->id,
+                    'product_id' => $product->id,
                     'cantidad' => $item['cantidad'],
                     'precio' => $price,
                     'subtotal' => $total,
