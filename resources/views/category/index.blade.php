@@ -26,7 +26,7 @@
                 <tr>
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->nombre }}</td>
-                    <td>{{ $category->description }}</td>
+                    <td>{{ $category->descripcion }}</td>
                     <td>
                         <a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-warning">Editar</a>
                         <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline;">

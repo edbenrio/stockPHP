@@ -34,9 +34,15 @@ class CategoryController extends Controller
         if(Gate::denies('category_create')) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
             'nombre' => ['required','string','max:255'],
+            'descripcion' => ['required','string','max:255'],
         ]);
 
-        Category::create(['nombre' => $request->nombre]);
+        Category::create(
+            [
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+            ]
+        );
         return redirect()->route('categories')
             ->with('success','Categoría creada satisfactoriamente.');
     }
@@ -67,9 +73,15 @@ class CategoryController extends Controller
         if(Gate::denies('category_edit')) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
             'nombre' => ['required','string','max:255'],
+            'descripcion' => ['required','string','max:255'],
         ]);
 
-        $category->update(['nombre' => $request->nombre]);
+        $category->update(
+            [
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion
+            ]
+        );
         return redirect()->route('categories')
             ->with('success','Categoría actualizada satisfactoriamente.');
     }

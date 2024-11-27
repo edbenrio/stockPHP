@@ -12,8 +12,8 @@
             <input type="text" name="nombre" class="form-control" value="{{ $category->nombre }}" required>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Descripción</label>
-            <textarea name="description" class="form-control">{{ $category->description }}</textarea>
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control">{{ $category->descripcion }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a href="{{ route('categories') }}" class="btn btn-secondary">Cancelar</a>
