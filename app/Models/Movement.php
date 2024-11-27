@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movement extends Model
 {
-    protected $fillable = ['producto_id', 'tipo', 'cantidad', 'usuario_id'];
+    protected $fillable = [
+        'producto_id',
+        'cantidad',
+        'precio',
+        'subtotal',
+        'tipo',
+        'user_id',
+    ];
 
     public function producto()
     {

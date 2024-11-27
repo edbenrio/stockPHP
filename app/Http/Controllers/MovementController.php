@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movement;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class MovementController extends Controller
 {
@@ -12,7 +13,10 @@ class MovementController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::
+            with('category')
+            ->get();
+        return view('pos.index', compact('products'));
     }
 
     /**
@@ -20,7 +24,7 @@ class MovementController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +32,45 @@ class MovementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $request->validate([
+            'products.*.product_id' => 'required|integer|min:1',
+            'products.*.cantidad' => 'required|integer|min:1',
+        ]);
+
+        \DB::beginTransaction();
+
+        try {
+            foreach ($request->products as $item) {
+                $product = Product::findOrFail($item['product_id']);
+        
+                if ($product->stock_actual < $item['cantidad']) {
+                    return back()->with('error', 'No hay suficiente stock para el producto ' . $product->nombre);
+                }
+        
+                $price = $product->precio;
+                $total = $price * $item['cantidad'];
+                
+                /*Registrar el movimiento*/
+                Movement::create([
+                    'producto_id' => $product->id,
+                    'cantidad' => $item['cantidad'],
+                    'precio' => $price,
+                    'subtotal' => $total,
+                    'tipo' => 'salida',
+                    'user_id' => \Auth::user()->id,
+                ]);
+        
+                /* Actualizar stock*/
+                $product->decrement('stock_actual', $item['cantidad']);
+            }
+
+            \DB::commit();
+            return redirect()->route('pos')->with('success', 'Venta registrada exitosamente.');
+        } catch (\Exception $e) {
+            \DB::rollBack(); 
+            return back()->with('error', 'Ocurrió un error al procesar la venta: ' . $e->getMessage());
+        }
     }
 
     /**

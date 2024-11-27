@@ -72,8 +72,8 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">Módulos</li>
           <li class="nav-item">
-            <a href="/categories" class="nav-link {{ Request::is('categories') ? 'active' : '' }}">
-              <i class="nav-icon far ion-android-checkbox-outline"></i>
+            <a href="/movements" class="nav-link {{ Request::is('movements') ? 'active' : '' }}">
+              <i class="nav-icon far ion-card"></i>
               <p>
                 POS
               </p>
@@ -147,8 +147,9 @@
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- AdminLTE App -->
 <script src="{{asset('plugins/js/adminlte.js')}}"></script>
+
+@yield('scripts')
 
 </body>
 </html>
