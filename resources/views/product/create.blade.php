@@ -8,7 +8,7 @@
         @csrf
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre del Producto</label>
-            <input type="text" name="nombre" class="form-control" required>
+            <input type="text" name="nombre" class="form-control" required autofocus>
         </div>
         <div class="mb-3">
             <label for="descripcion" class="form-label">Descripcion del Producto</label>

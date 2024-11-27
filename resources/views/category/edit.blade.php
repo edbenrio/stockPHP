@@ -9,7 +9,7 @@
         @method('PUT')
         <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" name="nombre" class="form-control" value="{{ $category->nombre }}" required>
+            <input type="text" name="nombre" class="form-control" value="{{ $category->nombre }}" required autofocus>
         </div>
         <div class="mb-3">
             <label for="descripcion" class="form-label">Descripción</label>
