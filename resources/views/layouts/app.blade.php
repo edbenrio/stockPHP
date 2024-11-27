@@ -67,28 +67,36 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-header">EXAMPLES</li>
+          <li class="nav-header">Módulos</li>
           <li class="nav-item">
-            <a href="/product" class="nav-link {{ Request::is('product') ? 'active' : '' }}">
-              <i class="nav-icon far fa-calendar-alt"></i>
+            <a href="/categories" class="nav-link {{ Request::is('categories') ? 'active' : '' }}">
+              <i class="nav-icon far ion-android-checkbox-outline"></i>
               <p>
-                Calendar
+                Categorías
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon far ion-cube"></i>
               <p>
-                Gallery
+                Productos
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="pages/kanban.html" class="nav-link">
-              <i class="nav-icon fas fa-columns"></i>
+              <i class="nav-icon fas ion-ios-cart"></i>
               <p>
-                Kanban Board
+                Ventas
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="pages/kanban.html" class="nav-link">
+              <i class="nav-icon fas ion-ios-download"></i>
+              <p>
+                Cargas
               </p>
             </a>
           </li>
@@ -105,7 +113,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            @yield('sectiontitle')
           </div>
           
         </div>

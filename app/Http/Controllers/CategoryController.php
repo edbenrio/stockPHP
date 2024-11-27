@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -12,8 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorias = Category::all();
-        return view('category.index', compact('categorias'));
+        if(Gate::denies('category_index')) abort(403, 'No tienes permiso para realizar esta acción.');
+        $categories = Category::all();
+        return view('category.index', compact('categories'));
     }
 
     /**
@@ -21,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -29,12 +31,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if(Gate::denies('category_create')) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
-            'name' => ['required','string','max:255'],
+            'nombre' => ['required','string','max:255'],
         ]);
 
-        Category::create(['name' => $request->name]);
-        return redirect()->route('category.index')
+        Category::create(['nombre' => $request->nombre]);
+        return redirect()->route('categories')
             ->with('success','Categoría creada satisfactoriamente.');
     }
 
@@ -51,6 +54,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        if(Gate::denies('category_edit')) abort(403, 'No tienes permiso para realizar esta acción.');
         $category = Category::find($id);
         return view('category.edit', compact('category'));
     }
@@ -60,12 +64,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        if(Gate::denies('category_edit')) abort(403, 'No tienes permiso para realizar esta acción.');
         $request->validate([
-            'name' => ['required','string','max:255'],
+            'nombre' => ['required','string','max:255'],
         ]);
 
-        $category->update(['name' => $request->name]);
-        return redirect()->route('category.index')
+        $category->update(['nombre' => $request->nombre]);
+        return redirect()->route('categories')
             ->with('success','Categoría actualizada satisfactoriamente.');
     }
 
@@ -74,8 +79,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        if(Gate::denies('category_delete')) abort(403, 'No tienes permiso para realizar esta acción.');
         $category->delete();
-        return redirect()->route('category.index')
+        return redirect()->route('categories')
             ->with('success','Categoría eliminada satisfactoriamente.');
     }
 }
