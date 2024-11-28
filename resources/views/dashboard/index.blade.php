@@ -16,7 +16,7 @@
             <div class="icon">
             <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/sales" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
         <!-- ./col -->
@@ -24,14 +24,14 @@
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-            <h3>{{$total_income}}</h3>
+            <h3>{{number_format($total_income, 2, ',', '.')}}</h3>
 
             <p>$ vendidos</p>
             </div>
             <div class="icon">
             <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/sales" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
         </div>
         </div>
         <!-- ./col -->
@@ -46,7 +46,7 @@
             <div class="icon">
             <i class="nav-icon far ion-cube"></i>
             </div>
-            <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/products" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
         </div>
         </div>
         <!-- ./col -->
@@ -61,7 +61,7 @@
             <div class="icon">
             <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/products" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
         </div>
         </div>
         <!-- ./col -->
