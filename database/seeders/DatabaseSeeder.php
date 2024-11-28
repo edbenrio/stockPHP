@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         $roles = ["caja", "deposito", "admin"];
         foreach ($roles as $role) {
-            Role::findOr(['name' => $role]);
+            Role::create(['name' => $role]);
             $u = User::factory()->create([
                 'name' => $role,
                 'email' => $role .'@example.com',
