@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Historial de cargas de stock</h1>
-    <table class="table table-striped">
+    <table id="history_table" class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
@@ -27,7 +27,21 @@
         </tbody>
         </thead>
     </table>
-
-    
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(function () {
+        $('#history_table').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        });
+    });
+</script>
 @endsection
