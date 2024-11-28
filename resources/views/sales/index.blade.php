@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ $sale->id }}</td>
                     <td>{{ $sale->product->nombre }}</td>
-                    <td>{{ $sale->quantity }}</td>
+                    <td>{{ $sale->cantidad }}</td>
                     <td>${{ number_format($sale->precio, 2) }}</td>
                     <td>${{ number_format($sale->subtotal, 2) }}</td>
                     <td>{{ $sale->created_at->format('d/m/Y H:i') }}</td>
