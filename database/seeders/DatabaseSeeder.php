@@ -18,20 +18,26 @@ class DatabaseSeeder extends Seeder
 
         /**crear usuario y asignar rol */
         /* super admin */
-        $u = User::factory()->create([
+        /*$u = User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'superadmin@example.com',
         ]);
 
         $roles = ["caja", "deposito", "admin"];
         foreach ($roles as $role) {
-            Role::create(['name' => $role]);
+            Role::findOr(['name' => $role]);
             $u = User::factory()->create([
                 'name' => $role,
                 'email' => $role .'@example.com',
             ]);
             $u->assignRole($role);
-        }
+        }*/
+
+        $this->call([
+            CategorySeeder::class,
+            ProductSeeder::class,
+            MovementSeeder::class,
+        ]);
 
     }
 }
