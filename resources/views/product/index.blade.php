@@ -13,7 +13,7 @@
         
     @endif
 
-    <table class="table table-bordered">
+    <table id="product_table" class="table table-bordered">
         <thead>
             <tr>
                 <th>#</th>
@@ -52,4 +52,17 @@
         </tbody>
     </table>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const table = new DataTable('#product_table', {
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+            }
+        });
+    });
+</script>
 @endsection

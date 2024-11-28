@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Lista de Ventas</h1>
 
-    <table class="table table-striped">
+    <table id="sales_table" class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
@@ -35,4 +35,17 @@
 
     
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        new DataTable('#sales_table', {
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+            }
+        });
+    });
+</script>
 @endsection
