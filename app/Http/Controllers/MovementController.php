@@ -137,7 +137,7 @@ class MovementController extends Controller
         $products = \App\Models\Product::count();
         $sales = Movement::where('tipo','salida')->count();
         $total_income = Movement::where('tipo','salida')->sum('subtotal');
-        $stock_bajo = \App\Models\Product::where('stock_actual', '<', 3)->get();
+        $stock_bajo = \App\Models\Product::where('stock_actual', '<=', 3)->get();
         return view('dashboard.index', compact('products','sales','total_income','stock_bajo'));
     }
 

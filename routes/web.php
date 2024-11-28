@@ -15,6 +15,7 @@ Route::middleware('auth')->group(function () {
     Route::get('categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
 
     Route::resource('products', App\Http\Controllers\ProductController::class);
+    Route::get('low_stock', [App\Http\Controllers\ProductController::class, 'lowStock']);
 
     Route::resource('movements', App\Http\Controllers\MovementController::class);
     Route::get('movements', [App\Http\Controllers\MovementController::class, 'index'])->name('pos');

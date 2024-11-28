@@ -46,7 +46,7 @@
             <div class="icon">
             <i class="nav-icon far ion-cube"></i>
             </div>
-            <a href="/products" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/low_stock" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
         </div>
         </div>
         <!-- ./col -->

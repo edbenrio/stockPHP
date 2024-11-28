@@ -13,6 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $products = Product::with('category')->get();
         return view('product.index', compact('products'));
     }
@@ -25,6 +26,16 @@ class ProductController extends Controller
         if(!(\Auth::user()->hasAnyRole('admin'))) abort(403, 'No tienes permiso para realizar esta acción.');
         $categories = \App\Models\Category::all(); // Obtener todas las categorías
         return view('product.create', compact('categories'));
+    }
+
+    /**
+     * Display a listing of the low stock products.
+     */
+    public function lowStock(){
+        $products = \App\Models\Product::
+            where('stock_actual', '<=', 3)
+            ->get();
+            return view('product.index', compact('products'));
     }
 
     /**

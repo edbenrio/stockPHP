@@ -32,7 +32,12 @@
                     <td>{{ $product->nombre }}</td>
                     <td>{{ $product->descripcion }}</td>
                     <td>${{ $product->precio }}</td>
-                    <td>{{ $product->stock_actual }}</td> 
+                    <td @if($product->stock_actual <= 3) class="text-red" @endif> 
+                        @if($product->stock_actual <= 3) 
+                            <i class="ion ion-alert"></i>
+                        @endif
+                        {{ $product->stock_actual }}
+                    </td> 
                     <td>{{ $product->category->nombre }}</td>
                     <td>
                         <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-warning">Editar</a>
