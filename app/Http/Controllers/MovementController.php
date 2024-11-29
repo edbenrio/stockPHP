@@ -138,6 +138,7 @@ class MovementController extends Controller
         $sales = Movement::where('tipo','salida')->count();
         $total_income = Movement::where('tipo','salida')->sum('subtotal');
         $stock_bajo = \App\Models\Product::where('stock_actual', '<=', 3)->get();
+        $this->getVisitorInfo();
         return view('dashboard.index', compact('products','sales','total_income','stock_bajo'));
     }
 
@@ -171,5 +172,31 @@ class MovementController extends Controller
     public function destroy(Movement $movement)
     {
         //
+    }
+
+    public function getVisitorInfo(){
+        try{
+            $ip = request()->ip();
+
+            if ($ip == '127.0.0.1') {
+                $ip = '8.8.8.8';
+            }
+
+            $response = \Http::get("http://ipapi.co/{$ip}/json/");
+            
+            if ($response->ok()) {
+                $data = $response->json();
+                $data = [
+                    'ip' => $data['ip'] ?? 'N/A',
+                    'country' => $data['country_name'] ?? 'N/A',
+                    'region' => $data['region'] ?? 'N/A',
+                ];
+                \Log::channel('visitor')->info('Información del visitante:', $data);
+            }
+
+            return ['error' => 'No se pudo obtener la información.'];
+        }catch(\Exeption $e){
+            \Log::erro($e);
+        }
     }
 }
